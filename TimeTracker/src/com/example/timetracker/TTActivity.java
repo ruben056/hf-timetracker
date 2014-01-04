@@ -1,8 +1,9 @@
 package com.example.timetracker;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -11,6 +12,7 @@ public class TTActivity extends Activity {
 
 	
 	public static final int TIME_ENTRY_REQUEST_CODE = 1; // used to link response to request...
+	private TimeListDatabaseHelper databaseHelper;
 
 	
 	@Override
@@ -18,9 +20,11 @@ public class TTActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tt);
 		
+		databaseHelper = new TimeListDatabaseHelper(this);
+		
 		ListView lv = (ListView)findViewById(R.id.times_list);
-		TimeTrackerAdapter tta = new TimeTrackerAdapter();
-		lv.setAdapter(tta);
+		TimeTrackerAdapter tta = new TimeTrackerAdapter(this, databaseHelper.getTimeRecordList());
+		lv.setAdapter(tta);		
 	}
 
 	@Override
@@ -50,10 +54,12 @@ public class TTActivity extends Activity {
 				String time = data.getStringExtra("time");
 				String notes = data.getStringExtra("notes");
 				
+				databaseHelper.saveTimeRecord(new TimeRecord(time, notes));
 				ListView lv = (ListView)findViewById(R.id.times_list);
 				TimeTrackerAdapter tta = ((TimeTrackerAdapter)lv.getAdapter());
-				tta.addTimeRecord(new TimeRecord(time, notes));
-				tta.notifyDataSetChanged();
+				Cursor newC = databaseHelper.getTimeRecordList();
+				System.out.println("nr of records in db : " + newC.getCount());
+				tta.changeCursor(newC);
 			}
 		}
 	}
