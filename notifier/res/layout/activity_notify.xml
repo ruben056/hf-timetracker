@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".NotifyActivity" >
+
+    <TextView
+        android:id="@+id/contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_name" 
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:layout_below="@+id/contact_name"
+        android:layout_alignLeft="@+id/contact_name"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"        
+        />
+    
+    <Button android:id="@+id/update_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update_contact"
+        android:layout_below="@+id/phone_number"
+        android:layout_alignLeft="@+id/contact_name"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        />
+    
+     <!--easy to position with light background and fix dimensions -->
+    <ImageView android:id="@+id/contact_portrait"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+		android:background="#aaa"
+		android:adjustViewBounds="true"
+		android:layout_alignParentRight="true"
+		android:layout_alignTop="@+id/contact_name"
+		android:layout_marginRight="10dp"		
+		/> 
+    
+    <Button android:id="@+id/cool_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cool_button"        
+        android:layout_centerInParent="true"
+        />
+    
+</RelativeLayout>
